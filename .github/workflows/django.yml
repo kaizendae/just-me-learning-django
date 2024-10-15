@@ -10,9 +10,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    env:
-      working-directory:
-        ./mysite
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./mysite
 
     steps:
     - uses: actions/checkout@v4
