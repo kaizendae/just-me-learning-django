@@ -5,9 +5,11 @@ from .models import Choice, Question
 
 admin.site.register(Choice)
 
+
 class ChoiceInline(admin.TabularInline):
     model = Choice
     extra = 3
+
 
 class QuestionAdmin(admin.ModelAdmin):
     fieldsets = [
@@ -15,5 +17,9 @@ class QuestionAdmin(admin.ModelAdmin):
         ("Date information", {"fields": ["pub_date"]}),
     ]
     inlines = [ChoiceInline]
+    list_display = ["question_text", "pub_date", "was_published_recently"]
+    list_filter = ["pub_date"]
+    search_fields = ["question_text"]
+
 
 admin.site.register(Question, QuestionAdmin)
