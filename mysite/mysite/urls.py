@@ -18,7 +18,6 @@ import os
 from django.contrib import admin
 from django.urls import include, path, re_path
 from django.views.static import serve
-from debug_toolbar.toolbar import debug_toolbar_urls
 
 from . import settings
 
@@ -41,4 +40,6 @@ urlpatterns = [
 
 
 if settings.USE_DEBUG_TOOLBAR:
+    from debug_toolbar.toolbar import debug_toolbar_urls
+
     urlpatterns += debug_toolbar_urls()
