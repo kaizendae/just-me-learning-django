@@ -25,8 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE_ROOT = os.path.join(BASE_DIR, "site")
 
 urlpatterns = [
-    path("home/", include("home.urls")),
-    path("hello/", include("hello.urls")),
+    path("", include("home.urls")),
     path("polls/", include("polls.urls")),
     path("admin/", admin.site.urls),
     path("session/", include("session.urls")),
