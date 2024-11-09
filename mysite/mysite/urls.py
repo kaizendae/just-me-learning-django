@@ -18,16 +18,22 @@ import os
 from django.contrib import admin
 from django.urls import include, path, re_path
 from django.views.static import serve
+from debug_toolbar.toolbar import debug_toolbar_urls
 
 # Up two folders to serve "site" content
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SITE_ROOT = os.path.join(BASE_DIR, 'site')
+SITE_ROOT = os.path.join(BASE_DIR, "site")
 
 urlpatterns = [
+    path("home/", include("home.urls")),
+    path("hello/", include("hello.urls")),
     path("polls/", include("polls.urls")),
-    path('admin/', admin.site.urls),
-    re_path(r'^site/(?P<path>.*)$', serve,
-        {'document_root': SITE_ROOT, 'show_indexes': True},
-        name='site_path'
+    path("admin/", admin.site.urls),
+    path("session/", include("session.urls")),
+    re_path(
+        r"^site/(?P<path>.*)$",
+        serve,
+        {"document_root": SITE_ROOT, "show_indexes": True},
+        name="site_path",
     ),
-]
+] + debug_toolbar_urls()

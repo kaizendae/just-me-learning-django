@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Theme Switcher</title>
+    <style>
+        .light {
+            background-color: #ffffff;
+            color: #000000;
+        }
+        .dark {
+            background-color: #222222;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="{{ theme }}" data-theme="{{ theme|default:'none' }}">
+    <h1>Current Theme: {{ theme|default:'not set' }}</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Switch Theme</button>
+    </form>
+
+    <p>This page remembers your theme preference using cookies!</p>
+</body>
+</html>
