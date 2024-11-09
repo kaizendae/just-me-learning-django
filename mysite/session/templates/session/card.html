@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Card Counter</title>
+</head>
+<body>
+    <h1>Card Counter</h1>
+    <p>Card count: {{ card_count }}</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" name="inc" value="true" {% if card_count >= 10 %}disabled{% endif %}>Increment</button>
+        <button type="submit" name="dec" value="true" {% if card_count <= 0 %}disabled{% endif %}>Decrement</button>
+    </form>
+
+</body>
+</html>

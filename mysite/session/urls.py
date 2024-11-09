@@ -5,8 +5,8 @@ from . import views
 
 app_name = "session"
 urlpatterns = [
-    # path('', TemplateView.as_view(template_name='home/main.html')),
-    # path('sessfun', sessfun, 'sessfun'),
     path("cookie", views.cookie),
     path("theme", views.theme_switcher, name="theme_switcher"),
+    path("sessfun", views.sessfun, name="sessfun"),
+    path("card", views.inc_dec_card, name="card"),
 ]

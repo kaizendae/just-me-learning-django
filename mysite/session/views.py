@@ -4,7 +4,29 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 def sessfun(request):
-    return render(request, "session/sessfun.html")
+    visits_count = request.session.get("visits_count", 0) + 1
+    request.session["visits_count"] = visits_count
+    if visits_count > 5:
+        del request.session["visits_count"]
+    return HttpResponse("You have visited this page " + str(visits_count) + " times")
+
+
+def inc_dec_card(request):
+    try:
+        card_count = int(request.session.get("card_count", 0))
+    except (ValueError, TypeError):
+        card_count = 0
+
+    if request.method == "POST":
+        print("POST data:", request.POST)
+        if request.POST.get("inc", False) and card_count < 10:
+            card_count += 1
+        elif request.POST.get("dec", False) and card_count > 0:
+            card_count -= 1
+
+        request.session["card_count"] = card_count
+
+    return render(request, "session/card.html", {"card_count": card_count})
 
 
 def cookie(request):
