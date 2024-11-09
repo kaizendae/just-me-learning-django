@@ -20,6 +20,8 @@ from django.urls import include, path, re_path
 from django.views.static import serve
 from debug_toolbar.toolbar import debug_toolbar_urls
 
+from . import settings
+
 # Up two folders to serve "site" content
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE_ROOT = os.path.join(BASE_DIR, "site")
@@ -35,4 +37,8 @@ urlpatterns = [
         {"document_root": SITE_ROOT, "show_indexes": True},
         name="site_path",
     ),
-] + debug_toolbar_urls()
+]
+
+
+if settings.USE_DEBUG_TOOLBAR:
+    urlpatterns += debug_toolbar_urls()
